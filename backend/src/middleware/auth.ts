@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { COOKIE_NAME, verifyToken } from "../lib/auth";
 import type { UserRole } from "../models/User";
+import "../types/express";
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies[COOKIE_NAME] as string | undefined;
