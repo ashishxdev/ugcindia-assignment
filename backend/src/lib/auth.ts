@@ -19,17 +19,25 @@ export function verifyToken(token: string) {
 }
 
 export function setSessionCookie(res: Response, token: string) {
+  const isProduction = env.NODE_ENV === "production";
+
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: env.NODE_ENV === "production",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     path: "/",
   });
 }
 
 export function clearSessionCookie(res: Response) {
-  res.clearCookie(COOKIE_NAME, { path: "/" });
+  const isProduction = env.NODE_ENV === "production";
+
+  res.clearCookie(COOKIE_NAME, {
+    path: "/",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
+  });
 }
 
 export { COOKIE_NAME };
