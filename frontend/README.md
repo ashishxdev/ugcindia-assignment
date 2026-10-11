@@ -8,6 +8,6 @@ npm install
 npm run dev -- --port 3001
 ```
 
-Set `NEXT_PUBLIC_API_URL` to the Express API base URL, normally `http://localhost:5001/api`.
+Set `BACKEND_URL` to the Express server origin, normally `http://localhost:5001` locally. The frontend proxies browser requests from `/api` to this server so authentication cookies remain first-party.
 
 For architecture, demo credentials, tests, assumptions and the complete setup guide, see the [repository README](../README.md).
